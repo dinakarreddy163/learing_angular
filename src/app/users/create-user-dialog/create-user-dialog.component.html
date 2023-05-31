@@ -1,0 +1,215 @@
+<div class="add-user-dialog-container">
+  <section class="dialog-header-bottom-border p-t-32 p-r-32 p-b-28 p-l-32">
+    <div class="add-user-dialog-header-text">
+      <div class="mat-headline-6 text-primary m-b-0">Add User</div>
+      <span class="fill-remaining-space"></span>
+      <button (click)="close(false)" mat-icon-button>
+        <mat-icon class="text-center align-middle m-b-8">close</mat-icon>
+      </button>
+    </div>
+    <div class="mat-subline-2 text-300">
+      Fill the below form to add a new user.
+    </div>
+    <div class="m-t-12 m-b-4">
+      <a class="mat-subtitle-2">
+        Complete Profile Registration
+        <mat-icon> arrow_forward </mat-icon>
+      </a>
+    </div>
+  </section>
+  <section class="p-32 add-user-dialog-form">
+    <form [formGroup]="createUserForm" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          placeholder="First Name"
+          maxlength="30"
+          formControlName="first_name"
+        />
+        <mat-error
+          *ngIf="createUserForm.get('first_name')?.getError('required')"
+          >firstname is required</mat-error
+        >
+        <mat-error *ngIf="createUserForm.get('first_name')?.getError('pattern')"
+          >only alphabetical value is allowed</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('first_name')?.getError('required') &&
+            createUserForm.get('first_name')?.getError('whitespace')
+          "
+          >whitespaces are not a valid input</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          placeholder="Last Name"
+          maxlength="30"
+          formControlName="last_name"
+        />
+        <mat-error *ngIf="createUserForm.get('last_name')?.getError('required')"
+          >lastname is required</mat-error
+        >
+        <mat-error *ngIf="createUserForm.get('last_name')?.getError('pattern')"
+          >only alphabetical value is allowed</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('last_name')?.getError('required') &&
+            createUserForm.get('last_name')?.getError('whitespace')
+          "
+          >whitespaces are not a valid input</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Email"
+          maxlength="50"
+          formControlName="email"
+        />
+        <mat-error *ngIf="createUserForm.get('email')?.getError('pattern')"
+          >email is not valid!</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('email')?.getError('required') &&
+            createUserForm.get('email')?.getError('whitespace')
+          "
+          >whitespaces are not a valid input</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          placeholder="Phone Number"
+          maxlength="10"
+          type="text"
+          formControlName="phone_number"
+        />
+        <mat-error
+          *ngIf="createUserForm.get('phone_number')?.getError('required')"
+          >Phone Number is required</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('phone_number')?.getError('required') &&
+            createUserForm.get('phone_number')?.getError('pattern')
+          "
+          >phone number is not valid!</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('phone_number')?.getError('required') &&
+            createUserForm.get('phone_number')?.getError('whitespace')
+          "
+          >whitespaces are not a valid input</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role_id">
+          <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" minlength="6" maxlength="30" formControlName="username" (keyup)="checkUserNameAvailability($event)">
+        <mat-error *ngIf="createUserForm.get('username')?.getError('required')">username is required</mat-error>
+        <mat-error *ngIf="createUserForm.get('username')?.getError('minlength')">min 6 characters are required</mat-error>
+        <mat-error *ngIf="createUserForm.get('username')?.getError('maxlength')">max 30 characters are allowed</mat-error>
+        <mat-error *ngIf="createUserForm.get('username')?.getError('pattern')">usename needs to be an alphanumeric string</mat-error>
+      </mat-form-field>
+      <div
+        class="m-t-0 m-b-4"
+        *ngIf="
+          UserNameAvailableText && !this.createUserForm.get('username')?.errors
+        "
+        [ngClass]="{
+          'success-color': isUserNameAvailable,
+          'error-color': !isUserNameAvailable
+        }"
+      >
+        {{ UserNameAvailableText }}
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="isShowPassword ? 'text' : 'password'"
+          minlength="6"
+          maxlength="30"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <mat-icon (click)="isShowPassword = !isShowPassword" matSuffix>
+          {{ isShowPassword ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-error *ngIf="createUserForm.get('password')?.getError('required')">password is required</mat-error>
+        <mat-error *ngIf="createUserForm.get('password')?.getError('minlength')">min 6 characters are required</mat-error>
+        <mat-error *ngIf="!createUserForm.get('password')?.getError('required') && createUserForm.get('password')?.getError('whitespace')">whitespaces are not a valid input</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          placeholder="Retype Correct Password"
+          minlength="6"
+          maxlength="30"
+          formControlName="confirm_password"
+        />
+        <mat-error
+          *ngIf="createUserForm.get('confirm_password')?.getError('required')"
+          >confirm password is required</mat-error
+        >
+        <mat-error
+          *ngIf="
+            !createUserForm.get('confirm_password')?.getError('required') &&
+            createUserForm.get('confirm_password')?.getError('whitespace')
+          "
+          >whitespaces are not a valid input</mat-error
+        >
+      </mat-form-field>
+      <mat-error
+        class="error-color"
+        *ngIf="createUserForm.errors?.['notmatched'] && (createUserForm.touched || createUserForm.dirty)"
+        >passwords does not Match</mat-error
+      >
+      <div class="">
+        <div class="secondary-text-color mat-subtitle-2">Status</div>
+        <mat-radio-group
+          aria-labelledby="radio-group-label"
+          color="primary"
+          class="radio-group"
+          formControlName="status"
+        >
+          <mat-radio-button
+            class="example-radio-button"
+            *ngFor="let status of statuses"
+            [value]="status.value"
+          >
+            {{ status.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="m-t-32">
+        <button
+          class="width-100"
+          mat-raised-button
+          [disabled]="!createUserForm.valid"
+          (click)="onSubmit()"
+          color="primary"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

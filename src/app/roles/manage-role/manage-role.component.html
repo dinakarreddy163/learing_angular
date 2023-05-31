@@ -1,0 +1,66 @@
+<div class="manage-role-container m-24">
+  <div class="d-flex align-items-center m-t-8 m-b-24">
+    <mat-icon color="accent" [routerLink]="['/home']">home</mat-icon>
+    <div class="m-l-8"><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="accent"
+      mat-button
+      routerLinkActive="router-link-active"
+    >
+      Roles & Permissions
+    </button>
+    <div class=""><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="accent"
+      mat-button
+      [routerLink]="['/roles']"
+      routerLinkActive="router-link-active"
+    >
+      Roles
+    </button>
+    <div class=""><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="primary"
+      mat-button
+      [routerLink]="['./']"
+      routerLinkActive="router-link-active"
+    >
+      Manage Roles
+    </button>
+  </div>
+  <div class="mat-headline-6 text-primary">{{ role?.name }}</div>
+  <div class="mat-body-1 text-300 m-t-4">{{ role?.description }}</div>
+  <mat-tab-group
+    *ngIf="role"
+    class="m-t-24 height-100"
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    dynamicHeight
+  >
+    <mat-tab label="Permissions">
+      <app-permissions
+        [isUpdate]="true"
+        [permissionData]="role.permission_groups"
+        (updatedPermissions)="updateRoleDetails($event)"
+      ></app-permissions>
+    </mat-tab>
+    <mat-tab label="Users">
+      <ng-template matTabContent>
+        <app-users [roleId]="roleId" [roleName]="roleName"></app-users>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Settings">
+      <ng-template matTabContent>
+        <app-settings
+          [roleId]="roleId"
+          [roleName]="roleName"
+          [roleDesc]="roleDesc"
+          (updatedRoleDetails)="updateRoleDetails($event)"
+        ></app-settings>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,56 @@
+<div class="m-t-32 settings-form-wrapper">
+  <div class="width-50 p-b-16">
+    <form [formGroup]="updateRoleForm" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Role Name"
+          formControlName="name"
+          maxlength="30"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          #textInput
+          matInput
+          maxlength="60"
+          formControlName="description"
+        ></textarea>
+        <div class="text-right mat-body-1 text-300">
+          <mat-hint>{{ textInput.value.length }}/60</mat-hint>
+        </div>
+      </mat-form-field>
+    </form>
+    <button
+      mat-flat-button
+      class="large-button button-redius-8"
+      (click)="updateeRoleDetails()"
+      color="primary"
+    >
+      Save
+    </button>
+  </div>
+  <div *ngIf="'roles' | permissions:'can_delete'"
+    class="delete-role-container d-flex justify-content-space-between align-items-end m-t-48 p-16 error-background"
+  >
+    <div>
+      <div class="mat-subtitle-2 error-color">Delete Role</div>
+      <div class="mat-body-1 text-300">
+        Deleting this role will remove all the permissions associated with it
+        and may affect user access.
+      </div>
+    </div>
+    <div class="">
+      <button
+        mat-flat-button
+        (click)="deleteRole()"
+        color="warn"
+        class="large-button button-radius-8"
+      >
+        Remove This Role
+      </button>
+    </div>
+  </div>
+</div>

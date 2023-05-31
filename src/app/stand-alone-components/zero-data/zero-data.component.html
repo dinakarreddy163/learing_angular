@@ -1,0 +1,19 @@
+<div
+  *ngIf="!(loadingService.isLoading$ | async)"
+  class="zero-data-container m-t-24 p-48"
+>
+  <mat-icon color="" class="large-icon material-icons-outlined text-secondary">
+    {{ icon }}
+  </mat-icon>
+  <div class="mat-headline-6 text-secondary">{{ zeroDataMessage }}</div>
+  <button
+    *ngIf="gateName | permissions:permissionType"
+    class="m-t-24 large-button button-radius-8"
+    mat-raised-button
+    color="primary"
+    (click)="performAction()"
+  >
+    <mat-icon>{{ buttonIcon }}</mat-icon>
+    {{ buttonText }}
+  </button>
+</div>

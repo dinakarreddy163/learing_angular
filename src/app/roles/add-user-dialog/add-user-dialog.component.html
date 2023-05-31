@@ -1,0 +1,86 @@
+<div class="add-role-dialog-container">
+  <div class="m-l-32 m-t-24 m-b-24 m-r-24">
+    <div class="d-flex-row">
+      <div class="mat-headline-6 text-primary m-b-0">Add User</div>
+      <span class="fill-remaining-space"></span>
+      <button (click)="close(null)" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="mat-subline-2 text-300 m-b-16">
+      Search and assign users to a role.
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div
+    *ngIf="addUserForm"
+    class="form-container m-l-32 m-t-24 m-b-24 m-r-24 d-flex-column justify-content-space-between"
+  >
+    <div>
+      <form [formGroup]="addUserForm" novalidate>
+        <mat-form-field class="" appearance="outline">
+          <mat-label>User Names</mat-label>
+          <input
+            placeholder="Type name or username to search"
+            #userInput
+            formControlName="username"
+            [matChipInputFor]="chipGrid"
+          />
+          <mat-chip-grid #chipGrid aria-label="Selected Users">
+            <mat-chip-row
+              class="chip"
+              *ngFor="let user of users"
+              (removed)="remove(user)"
+            >
+              {{ user.first_name }} {{ user.last_name }}
+              <button matChipRemove [attr.aria-label]="'remove ' + user">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-chip-row>
+          </mat-chip-grid>
+        </mat-form-field>
+        <div class="m-t-0">
+          <div *ngFor="let user of usersList" class="list-card-item m-b-8">
+            <div class="d-flex-row align-items-center">
+              <div class="user-list-item-card-avatar">
+                {{ profileName(user) }}
+              </div>
+              <div class="m-l-10 d-flex-column">
+                <div class="mat-body-1 text-primary">
+                  {{ user.first_name }} {{ user.last_name }}
+                </div>
+                <div class="mat-body-2 text-300">@{{ user.username }}</div>
+              </div>
+              <span class="fill-remaining-space"></span>
+              <button mat-button color="primary" (click)="addUser(user)">
+                <mat-icon class="material-icons-outlined">add</mat-icon>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+      <section class="m-t-24 d-flex-row align-items-center justify-content-end">
+        <button
+          mat-stroked-button
+          class="outline-button-accent"
+          color="accent"
+          class="m-r-14"
+          (click)="clear()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="users.length === 0"
+          (click)="addUsersToRole()"
+        >
+          Add Users
+        </button>
+      </section>
+    </div>
+  </div>
+</div>

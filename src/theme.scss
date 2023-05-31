@@ -1,0 +1,30 @@
+@use "@angular/material" as mat;
+@import "./theme_variables.scss";
+
+/**
+   Include the common styles for Angular Material. Include this here so that only
+   single css file is loaded for Angular Material in the app.
+**/
+@include mat.core();
+
+/**
+   A theme consists of configurations for individual
+   theming systems such as "color" or "typography".
+ **/
+$Standard-Dashboard-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $Standard-Dashboard-primary,
+      accent: $Standard-Dashboard-accent,
+      warn: $Standard-Dashboard-error,
+    ),
+    typography: $Standard-Dashboard-typography,
+    density: 0,
+  )
+);
+// Include theme styles for core and each component used in your app.
+@include mat.all-component-themes($Standard-Dashboard-theme);
+.densed-form-field {
+  @include mat.form-field-density(-3.5);
+}
+@include mat.typography-hierarchy($Standard-Dashboard-typography);

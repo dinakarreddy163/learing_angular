@@ -1,0 +1,78 @@
+<div class="permission-group-container m-24">
+  <div class="d-flex align-items-center m-t-8 m-b-24">
+    <mat-icon color="accent" [routerLink]="['/home']">home</mat-icon>
+    <div class="m-l-8"><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="accent"
+      mat-button
+      routerLinkActive="router-link-active"
+    >
+      Roles & Permissions
+    </button>
+    <div class=""><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="accent"
+      mat-button
+      [routerLink]="['/permission-groups']"
+      routerLinkActive="router-link-active"
+    >
+      Permissions
+    </button>
+    <div class=""><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="primary"
+      mat-button
+      [routerLink]="['./']"
+      routerLinkActive="router-link-active"
+    >
+      {{ permissionGroupName }}
+    </button>
+  </div>
+  <div *ngIf="permissionGroupName">
+    <div class="d-flex justify-content-space-between align-items-end m-t-24">
+      <div>
+        <div class="mat-headline-6 text-primary">{{ permissionGroupName }}</div>
+        <div class="mat-body-2 text-300 m-t-4">{{ permissionGroupDesc }}</div>
+      </div>
+      <span *ngIf="'permissions' | permissions:'can_write'">
+      <button
+        mat-flat-button
+        *ngIf="permissions && permissions.length > 0"
+        color="primary"
+        (click)="openNameAndDescriptionFormDialog()"
+        class="large-button button-radius-8"
+      >
+        <mat-icon>add</mat-icon>Add New Permission
+      </button>
+    </span>
+    </div>
+    <ng-container
+      *ngIf="!permissions || permissions.length === 0; else permissionsTable"
+      #noPermissions
+    >
+      <app-zero-data
+        [icon]="'rule_folder'"
+        [zeroDataMessage]="'No permissions added to this group yet!'"
+        [isDialog]="true"
+        [buttonIcon]="'add'"
+        [gateName]="'permissions'"
+        [permissionType]="'can_write'"
+        [buttonText]="'Add New Permission'"
+        (openDialog)="openNameAndDescriptionFormDialog()"
+      ></app-zero-data>
+    </ng-container>
+    <ng-template #permissionsTable>
+      <custom-table
+        [tableData]="permissions"
+        [gateName]="'permissions'"
+        [rowActionIcons]="rowActionIcons"
+        (rowAction)="onAction($event)"
+        [tableColumns]="permissionsTableColumns"
+      >
+      </custom-table>
+    </ng-template>
+  </div>
+</div>

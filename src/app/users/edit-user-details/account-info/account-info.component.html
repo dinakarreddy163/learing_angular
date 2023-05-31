@@ -1,0 +1,38 @@
+<div class="info-card">
+  <mat-card class="p-t-8 p-r-16 p-b-8 p-l-16">
+    <mat-card-content>
+      <div class="mat-headline-6 text-400">Account Details</div>
+      <div class="mat-subtitle-1 text-300 m-t-4">
+        Update users account details here.
+      </div>
+      <section class="m-t-24">
+        <form [formGroup]="accountInfoForm" novalidate>
+          <div>
+            <mat-form-field class="width-100" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input
+                matInput
+                placeholder="Username"
+                formControlName="username"
+              />
+            </mat-form-field>
+          </div>
+          <div class="width-100">
+          <mat-form-field class="m-r-15 width-48" appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role_id">
+              <mat-option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="m-l-15 width-48" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let status of statuses" [value]="status.value">{{ status.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+         </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

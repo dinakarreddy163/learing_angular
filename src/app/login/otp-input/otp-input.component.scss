@@ -1,0 +1,12 @@
+.otp-input-field {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.mat-mdc-form-field {
+  width: 55px;
+}
+.disabled-resend {
+  color: #636578;
+  pointer-events: none;
+}

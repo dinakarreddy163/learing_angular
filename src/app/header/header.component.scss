@@ -1,0 +1,46 @@
+@import "src/theme_variables.scss";
+
+.profile-card {
+  max-width: 250px;
+  height: 64px;
+  border-radius: 0px;
+  box-shadow: none;
+  z-index: 0;
+  border-left: none;
+  background-color: inherit;
+}
+
+.profile-header-image {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  color: #ffffff;
+  line-height: 40px;
+  background-color: $info;
+}
+.accent-color {
+  color: $accent;
+}
+
+.profile-header {
+  padding: 12px;
+}
+
+.profile-header-text {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 12px 0px 12px;
+}
+
+.profile-title {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid $outline-border-color;
+}
+.loader-bar {
+  height: 0px;
+}

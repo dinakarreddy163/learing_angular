@@ -1,0 +1,17 @@
+<div class="centered text-center">
+  <div class="mat-headline-1 subtitle-color">{{ errorId }}</div>
+  <div class="mat-headline-6 subtitle-color">{{ error.message }}</div>
+  <p class="subtitle-color">
+    {{ error.description }}
+  </p>
+  <div class="login-button">
+    <button
+      mat-raised-button
+      [routerLink]="error.route"
+      routerLinkActive="router-link-active"
+      color="primary"
+    >
+      Back To Home
+    </button>
+  </div>
+</div>

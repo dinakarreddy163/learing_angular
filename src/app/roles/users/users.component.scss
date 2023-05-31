@@ -1,0 +1,26 @@
+.list-card {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #DEDEDE;
+}
+
+.list-card-item {
+  height: 56px;
+  border-bottom: 1px solid #DEDEDE;
+}
+
+.list-card .list-card-item:last-child {
+  border: none;
+}
+
+.user-list-item-card-avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+  background-color: #2d9cdb;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  line-height: 32px;
+  margin-top: 4px;
+}

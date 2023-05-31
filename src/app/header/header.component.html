@@ -1,0 +1,51 @@
+<mat-toolbar class="toolbar" color="">
+  <mat-toolbar-row class="mat-elevation-z0">
+    <button
+      (click)="sidenavComp.isExpanded = !sidenavComp.isExpanded"
+      mat-icon-button
+      class="example-icon"
+      aria-label="icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="fill-remaining-space"></span>
+    <button
+      matTooltip="Notifications"
+      mat-icon-button
+      class="bell-icon"
+      aria-label="icon-button with bell icon"
+    >
+      <mat-icon class="">notifications</mat-icon>
+    </button>
+    <button
+      matTooltip="Logout"
+      mat-icon-button
+      (click)="logout()"
+      class="logout-icon"
+      aria-label="icon-button with logout icon"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+    <mat-card class="profile-card">
+      <mat-card-header class="profile-header">
+        <div mat-card-avatar class="profile-header-image">
+          {{ profileName }}
+        </div>
+        <div class="profile-header-text">
+          <div class="profile-title mat-body-2">
+            {{ firstName }}
+            <mat-icon>expand_more</mat-icon>
+          </div>
+          <div class="mat-caption profile-subtitle accent-color">{{roleName}}</div>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="loader-bar">
+<mat-progress-bar
+  *ngIf="loadingService.isLoading$ | async"
+  color="warn"
+  mode="indeterminate"
+></mat-progress-bar>
+</div>

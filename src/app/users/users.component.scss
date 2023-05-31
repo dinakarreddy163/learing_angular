@@ -1,0 +1,93 @@
+@import "src/theme_variables.scss";
+
+.table-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.search-input-width {
+  width: 400px;
+}
+
+.column-filters .status-filter, .role-filter {
+  width: 128px;
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.clear-btn {
+  text-align: center;
+}
+
+.no-user-container {
+  border: 1px solid $outline-border-color;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+.users-table-container {
+  border-top: 1px solid $outline-border-color;
+  border-left: 1px solid $outline-border-color;
+  border-right: 1px solid $outline-border-color;
+  border-radius: 8px 8px 0px 0px;
+  min-height: 200px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mdc-data-table__header-cell {
+  color: $text-500;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.17px;
+}
+
+.mdc-data-table__cell {
+  color: $text-400;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.paginator {
+  border: 1px solid $outline-border-color;
+  border-radius: 0px 0px 8px 8px;
+}
+
+.selection-count-container {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #eff5ff;
+  border-radius: 25px;
+  color: $primary;
+  .count {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    position: relative;
+    bottom: 3px;
+  }
+}

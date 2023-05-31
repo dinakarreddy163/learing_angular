@@ -1,0 +1,48 @@
+<div class="m-t-24">
+  <div class="d-flex justify-content-space-between align-items-end">
+    <div>
+      <div class="mat-subtitle-2 text-primary">Total Users</div>
+      <div class="mat-body-1 text-300">
+        List of users assigned to the {{ roleName | lowercase }} role.
+      </div>
+    </div>
+    <div class="d-flex-row">
+      <div class="searchBox">
+        <mat-icon class="m-8" color="accent">search</mat-icon>
+        <input
+          type="text"
+          name="search"
+          (keyup)="applyFilter($event)"
+          placeholder="Search Users"
+          class="searchInput m-t-10"
+        />
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="addUser()"
+        class="m-l-16 large-button button-radius-8"
+      >
+        <mat-icon>add</mat-icon>Add Users
+      </button>
+    </div>
+  </div>
+  <div *ngIf="users && users.length > 0" class="list-card m-t-32">
+    <div *ngFor="let user of users" class="p-l-24 p-r-24 list-card-item d-flex justify-content-space-between">
+      <div class="d-flex-row align-items-center">
+        <div class="user-list-item-card-avatar">{{ profileName(user) }}</div>
+        <div class="m-l-10 d-flex-column">
+          <div class="mat-body-1 text-primary">
+            {{ user.first_name }} {{ user.last_name }}
+          </div>
+          <div class="mat-body-2 text-300">@{{ user.username }}</div>
+        </div>
+      </div>
+      <div class="m-t-4">
+        <button mat-icon-button (click)="removeUser(user.id)">
+          <mat-icon class="material-icons-outlined" color="accent">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

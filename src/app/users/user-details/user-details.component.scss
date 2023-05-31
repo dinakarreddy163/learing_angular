@@ -1,0 +1,61 @@
+@use "@angular/material" as mat;
+@import "src/theme_variables.scss";
+
+.user-detail-card-avatar {
+  height: 64px;
+  width: 64px;
+  background-color: $info;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+  line-height: 64px;
+  margin-top: 16px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-header {
+  border-bottom: 1px solid $divider-color;
+}
+
+.mat-mdc-card-header {
+  padding: 0px 0px 24px 0px !important;
+}
+
+.mat-mdc-card-content {
+  padding: 0px 0px 24px 0px !important;
+}
+
+.details-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.details-container .detail-item {
+  flex: 1;
+}
+
+.details-container .detail-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  min-width: 35%;
+  max-width: 40%;
+}
+
+.detail-item-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-icon-button {
+  padding: 10px 10px 5px 10px;
+  background: mat.get-color-from-palette($Standard-Dashboard-primary, 50);
+  border-radius: 8px;
+}

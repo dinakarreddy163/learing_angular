@@ -1,0 +1,68 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*",
+    "*.spec.ts",
+    "main.ts",
+    "test.ts"
+  ],
+  
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "lps-admin",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "lps-admin",
+            "style": "kebab-case"
+          }
+        ],
+        "no-console": "error",
+        "semi": "error",
+        "quotes": ["error", "single", { "avoidEscape": true }],
+        "no-alert": "error",
+        "no-debugger": "error",
+        "no-empty-function": ["error", {"allow": ["arrowFunctions", "constructors"]}],
+        "max-lines": ["error", {"max": 400, "skipComments": true}],
+        "eqeqeq": "error", // == shouldn't be used
+        "guard-for-in": "error",
+        "indent":["error", 2],
+        "camelcase": ["error", {"properties": "always", "ignoreImports": true }],
+        "no-unused-vars": "error",
+        "no-unused-private-class-members": "error",
+        "space-before-blocks": "error"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

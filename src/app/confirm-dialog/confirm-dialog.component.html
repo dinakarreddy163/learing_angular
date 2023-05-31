@@ -1,0 +1,27 @@
+<div class="add-user-dialog-container">
+  <section
+    class="confirm-header-text dialog-header-bottom-border p-t-32 p-r-32 p-b-24 p-l-32"
+  >
+    <mat-icon class="confirm-mat-icon m-t-4" [color]="data.color">
+      {{ data.icon }}
+    </mat-icon>
+    <div class="m-l-0">
+      <div class="mat-headline-6 text-primary">{{ data.headerText }}</div>
+      <div class="mat-subtitle-1 text-secondary">{{ data.message }}</div>
+    </div>
+  </section>
+  <section class="action-buttons p-24">
+    <button
+      mat-stroked-button
+      class="outline-button-accent"
+      color="accent"
+      class="m-r-14"
+      (click)="close(false)"
+    >
+      Cancel
+    </button>
+    <button mat-flat-button color="{{ data.color }}" (click)="close(true)">
+      Confirm
+    </button>
+  </section>
+</div>

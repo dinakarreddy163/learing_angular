@@ -1,0 +1,51 @@
+.table-container {
+  .mdc-data-table__table {
+    border: 1px solid #d8d8dd;
+    border-radius: 8px;
+    overflow: auto;
+    width: 100%;
+  }
+}
+.table-container-paginator {
+  .mdc-data-table__table {
+  border-top: 1px solid #d8d8dd;
+  border-left: 1px solid #d8d8dd;
+  border-right: 1px solid #d8d8dd;
+  border-radius: 8px 8px 0px 0px;
+  min-height: 200px;
+  height: 400px;
+  max-height: 500px;
+  overflow: auto;
+  width: 100%;
+  }
+}
+.mdc-data-table__header-cell {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+}
+.text-right {
+  text-align: right;
+}
+
+.search-container {
+  width: 400px;
+}
+.search-input-width {
+  width: 300px;
+}
+.table-paginator {
+  border: 1px solid #d8d8dd;
+  border-radius: 0px 0px 8px 8px;
+  width: 100%;
+}
+.no-data-container {
+  border: 1px solid #d8d8dd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}

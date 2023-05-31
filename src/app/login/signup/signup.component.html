@@ -1,0 +1,209 @@
+<div class="split left">
+  <div>
+    <img
+      height="36px"
+      width="40px"
+      src="assets/cq_logo.png"
+      alt="CraftedQ Logo"
+    />
+  </div>
+</div>
+<div class="split right">
+  <div class="">
+    <div class="m-l-28 icon-header-wrapper">
+      <mat-icon class="text-600">person</mat-icon>
+    </div>
+    <form [formGroup]="signUpForm" novalidate>
+      <mat-card class="login-card">
+        <div class="mat-headline-6">User Registration</div>
+        <p class="mat-subtitle-2 subtitle-color" color="secondary">
+          Enter registration details below
+        </p>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            placeholder="First Name"
+            maxlength="30"
+            formControlName="first_name"
+          />
+          <mat-error *ngIf="signUpForm.get('first_name')?.getError('required')"
+            >firstname is required</mat-error
+          >
+          <mat-error *ngIf="signUpForm.get('first_name')?.getError('pattern')"
+            >only alphabetical value is allowed</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('first_name')?.getError('required') &&
+              signUpForm.get('first_name')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Last Name"
+            maxlength="30"
+            formControlName="last_name"
+          />
+          <mat-error *ngIf="signUpForm.get('last_name')?.getError('required')"
+            >lastname is required</mat-error
+          >
+          <mat-error *ngIf="signUpForm.get('last_name')?.getError('pattern')"
+            >only alphabetical value is allowed</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('last_name')?.getError('required') &&
+              signUpForm.get('last_name')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            maxlength="50"
+            formControlName="email"
+          />
+          <mat-error *ngIf="signUpForm.get('email')?.getError('pattern')"
+            >email is not valid!</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('email')?.getError('required') &&
+              signUpForm.get('email')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            placeholder="Phone Number"
+            maxlength="10"
+            type="text"
+            formControlName="phone_number"
+          />
+          <mat-error
+            *ngIf="signUpForm.get('phone_number')?.getError('required')"
+            >Phone Number is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('phone_number')?.getError('required') &&
+              signUpForm.get('phone_number')?.getError('pattern')
+            "
+            >phone number is not valid!</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('phone_number')?.getError('required') &&
+              signUpForm.get('phone_number')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Username"
+            minlength="6"
+            maxlength="30"
+            formControlName="username"
+          />
+          <mat-error *ngIf="signUpForm.get('username')?.getError('required')"
+            >username is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('username')?.getError('required') &&
+              signUpForm.get('username')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="isShowPassword ? 'text' : 'password'"
+            minlength="6"
+            maxlength="30"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <mat-icon (click)="isShowPassword = !isShowPassword" matSuffix>
+            {{ isShowPassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+          <mat-error *ngIf="signUpForm.get('password')?.getError('required')"
+            >password is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('password')?.getError('required') &&
+              signUpForm.get('password')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            placeholder="Retype Correct Password"
+            minlength="6"
+            maxlength="30"
+            formControlName="confirm_password"
+          />
+          <mat-error
+            *ngIf="signUpForm.get('confirm_password')?.getError('required')"
+            >confirm password is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !signUpForm.get('confirm_password')?.getError('required') &&
+              signUpForm.get('confirm_password')?.getError('whitespace')
+            "
+            >whitespaces are not a valid input</mat-error
+          >
+        </mat-form-field>
+        <mat-error
+          class="error"
+          *ngIf="signUpForm.errors?.['notmatched'] && (signUpForm.touched || signUpForm.dirty)"
+          >passwords does not Match</mat-error
+        >
+        <div class="">
+          <mat-checkbox
+            formControlName="t_c_agreement"
+            class="remember-me-checkbox"
+            >I Agree to privacy policy & terms</mat-checkbox
+          >
+        </div>
+        <div class="m-t-24">
+          <button
+            mat-raised-button
+            (click)="onSubmit()"
+            [disabled]="!signUpForm.valid"
+            routerLinkActive="router-link-active"
+            color="primary"
+          >
+            Login
+          </button>
+        </div>
+        <p class="m-t-24 text-center">
+          Already have an account?
+          <a [routerLink]="['/login']">Sign in instead</a>
+        </p>
+      </mat-card>
+    </form>
+  </div>
+</div>

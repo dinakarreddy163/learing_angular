@@ -1,0 +1,32 @@
+<div class="table-container m-24">
+  <div class="mat-headline-6 text-primary p-b-12">Login History</div>
+  <div class="d-flex align-items-center m-t-0 m-b-24">
+    <mat-icon color="accent" [routerLink]="['/home']">home</mat-icon>
+    <div class="m-l-8"><span>/</span></div>
+    <button
+      class="m-l-4"
+      color="primary"
+      mat-button
+      [routerLink]="['/users']"
+      routerLinkActive="router-link-active"
+    >
+      Users
+    </button>
+  </div>
+  <custom-table
+    (pageChange)="handlePageChange($event)"
+    (sort)="handleSortChange($event)"
+    (filter)="applyFilter($event)"
+    (rowAction)="onAction($event)"
+    [defaultSortProperty]="'id'"
+    [defaultSortDirection]="'desc'"
+    [tableData]="loginHistory"
+    [gateName]="'login_history'"
+    [rowActionIcons]="rowActionIcons"
+    [tableColumns]="loginHistoryTableColumns"
+    [isFilterable]="true"
+    [isPageable]="true"
+    [total]="total"
+  >
+  </custom-table>
+</div>

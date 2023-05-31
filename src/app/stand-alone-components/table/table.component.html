@@ -1,0 +1,101 @@
+<div>
+  <!-- Filter -->
+  <div *ngIf="isFilterable" class="search-container">
+    <div class="searchBox">
+      <mat-icon class="m-8" color="accent">search</mat-icon>
+      <input
+        type="text"
+        name="search"
+        (keyup)="emitFilterEvent($event)"
+        placeholder="Filter Rows (3 letters min)"
+        class="search-input-width searchInput m-t-10"
+      />
+    </div>
+    </div>
+  <!-- Table -->
+  <ng-container *ngIf="tableDataSourceLength === 0" #noData>
+    <div class="no-data-container m-t-24 p-48">
+      <img src="assets/no_user.png" />
+      <div class="subtitle-color m-t-24 mat-headline-6">No Data Found</div>
+    </div>
+  </ng-container>
+  <div [ngClass]="{'table-container-paginator': isPageable, 'table-container': !isPageable}">
+  <mat-table
+    *ngIf="tableDataSourceLength != 0"
+    class="m-t-24 mat-elevation-z0"
+    [dataSource]="tableDataSource"
+    matSort
+    (matSortChange)="sortTable($event)"
+    [matSortActive]="defaultSortProperty"
+    [matSortDirection]="defaultSortDirection"
+    matSortDisableClear
+  >
+    <ng-container
+      *ngFor="let tableColumn of tableColumns"
+      [matColumnDef]="tableColumn.name"
+    >
+      <!-- if sortable column header -->
+      <ng-container *ngIf="tableColumn.isSortable; else notSortable">
+        <mat-header-cell
+          *matHeaderCellDef
+          [mat-sort-header]="tableColumn.name"
+          [arrowPosition]="
+            tableColumn.position === 'right' ? 'before' : 'after'
+          "
+        >
+          <div class="text-secondary">{{ tableColumn.name | uppercase }}</div>
+        </mat-header-cell>
+      </ng-container>
+      <!-- else not sortable -->
+      <ng-template #notSortable>
+        <mat-header-cell
+          *matHeaderCellDef
+          [class.text-right]="tableColumn.position == 'right'"
+        >
+          <div class="text-secondary">{{ tableColumn.name | uppercase }}</div>
+        </mat-header-cell>
+      </ng-template>
+
+      <!-- column data -->
+      <mat-cell
+        *matCellDef="let element"
+        [class.text-right]="tableColumn.position == 'right'"
+      >
+        <div class="text-400 {{ tableColumn?.textColor }}">
+          {{ element | dataPropertyGetter : tableColumn.dataKey : tableColumn?.nestedObjectKey }}
+        </div>
+      </mat-cell>
+    </ng-container>
+    <!-- action column -->
+    <ng-container
+      *ngIf="rowActionIcons && rowActionIcons.length"
+      [matColumnDef]="'rowAction'"
+    >
+      <mat-header-cell *matHeaderCellDef class="">
+        <div class="text-secondary p-l-16">ACTIONS</div>
+      </mat-header-cell>
+      <mat-cell class="action-icons" *matCellDef="let element">
+        <div *ngFor="let actionIcon of rowActionIcons">
+        <button *ngIf="gateName | permissions:actionIcon.permissionType" color="accent" mat-icon-button class="material-icons-outlined text-300 m-r-8"  (click)="emitRowAction(actionIcon.name, element)" >
+          {{ actionIcon.icon }}
+        </button>
+      </div>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <!-- Pagination -->
+  <mat-paginator
+    class="table-paginator"
+    *ngIf="isPageable"
+    (page)="emitPageEvent($event)"
+    [pageSizeOptions]="paginationSizes"
+    [length]="tableDataSourceLength"
+    [pageSize]="defaultPageSize"
+    showFirstLastButtons="false"
+  >
+  </mat-paginator>
+</div>
+</div>

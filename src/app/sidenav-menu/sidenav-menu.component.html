@@ -1,0 +1,70 @@
+<div [ngClass]="{ 'sidenav-expanded': isExpanded, sidenav: !isExpanded }">
+  <mat-nav-list>
+    <div class="d-flex align-items-center" mat-subheader>
+      <img height="28px" width="40px" src="assets/cq_logo.png" alt="CraftedQ Logo" />
+      <div *ngIf="isExpanded" class="text-center align-middle mat-headline-6 m-l-8">SDS</div>
+    </div>
+    <div class="menu-item">
+      <button mat-button matTooltip="Home" matTooltipPosition="right" (click)="activeLinkParent('')"
+        [routerLink]="['/home']" routerLinkActive #homeLink="routerLinkActive" class="width-100 button-radius-8">
+        <mat-icon color="{{ homeLink.isActive && standAloneLinkActive ? 'primary' : '' }}" class="text-400 material-icons-outlined">home
+        </mat-icon>
+        <span *ngIf="isExpanded" [ngClass]="{'primary-text-color': homeLink.isActive && isExpanded && standAloneLinkActive}">Dashboard</span>
+      </button>
+    </div>
+    <div class="menu-item">
+      <button mat-button matTooltip="Users" matTooltipPosition="right"
+        (click)="activeLinkParent('users')"
+        class="width-100 button-radius-8">
+        <mat-icon color="{{ showUsersSubMenu && !standAloneLinkActive ? 'primary' : '' }}" class="text-400 material-icons-outlined">person
+        </mat-icon>
+        <span *ngIf="isExpanded" [ngClass]="{'primary-text-color': showUsersSubMenu && isExpanded && !standAloneLinkActive}"  class="d-flex align-items-center">Users</span>
+        <mat-icon iconPositionEnd color="accent" class="text-right">{{
+          showUsersSubMenu ? "expand_less" : "expand_more"
+          }}</mat-icon>
+      </button>
+      <div *ngIf="showUsersSubMenu">
+        <mat-list-item *ngIf="'user' | permissions:'can_read'" class="m-t-8" [disableRipple]="true" [activated]="usersList.isActive"
+          matTooltip="Users Listing" matTooltipPosition="right" role="usersList" [routerLink]="['/users']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive
+          #usersList="routerLinkActive">
+          <mat-icon matListItemIcon class="material-icons-outlined">groups</mat-icon>
+          <div matListItemTitle class="text-400">Users Listing</div>
+        </mat-list-item>
+        <mat-list-item *ngIf="'login_history' | permissions:'can_read'" class="m-t-8" [disableRipple]="true" [activated]="loginHistory.isActive"
+          matTooltip="Login History" matTooltipPosition="right"
+          role="permissions" [routerLink]="['/users/login-history']" routerLinkActive [routerLinkActiveOptions]="{exact: true}" #loginHistory="routerLinkActive">
+          <mat-icon matListItemIcon class="material-icons-outlined">history</mat-icon>
+          <div matListItemTitle class="text-400">Login History</div>
+        </mat-list-item>
+      </div>
+    </div>
+    <div  class="menu-item">
+      <button mat-button matTooltip="Roles & Permissions" matTooltipPosition="right"
+        (click)="activeLinkParent('rolesAndPermissions')"
+        class="width-100 button-radius-8">
+        <mat-icon color="{{ showRolesAndPermissionsSubMenu && !standAloneLinkActive ? 'primary' : '' }}" class="text-400 material-icons-outlined">lock
+        </mat-icon>
+        <span *ngIf="isExpanded" [ngClass]="{'primary-text-color': isExpanded && showRolesAndPermissionsSubMenu && !standAloneLinkActive}" class="d-flex align-items-center">
+          Roles & Permissions
+        </span>
+        <mat-icon color="accent" iconPositionEnd class="text-right">{{
+          showRolesAndPermissionsSubMenu ? "expand_less" : "expand_more"
+          }}</mat-icon>
+      </button>
+      <div *ngIf="showRolesAndPermissionsSubMenu">
+        <mat-list-item *ngIf="'roles' | permissions:'can_read'" class="m-t-8" [disableRipple]="true" [activated]="roles.isActive"
+          matTooltip="Roles" matTooltipPosition="right" role="roles" [routerLink]="['/roles']" routerLinkActive
+          #roles="routerLinkActive">
+          <mat-icon matListItemIcon class="material-icons-outlined">folder_shared</mat-icon>
+          <div matListItemTitle class="text-400">Roles</div>
+        </mat-list-item>
+        <mat-list-item *ngIf="'permissions' | permissions:'can_read'" class="m-t-8" [disableRipple]="true"
+          [activated]="permissions.isActive" matTooltip="Permission Groups" matTooltipPosition="right"
+          role="permissions" [routerLink]="['/permission-groups']" routerLinkActive #permissions="routerLinkActive">
+          <mat-icon matListItemIcon class="material-icons-outlined">lock_person</mat-icon>
+          <div matListItemTitle class="text-400">Permissions</div>
+        </mat-list-item>
+      </div>
+    </div>
+  </mat-nav-list>
+</div>

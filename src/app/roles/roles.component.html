@@ -1,0 +1,50 @@
+<div class="m-24">
+  <div class="mat-headline-6 text-primary m-b-8">Roles</div>
+  <div class="d-flex align-items-center m-t-0 m-b-16">
+    <mat-icon color="accent"[routerLink]="['/home']">home</mat-icon>
+  <div class="m-l-8"><span>/</span></div>
+  <button class="m-l-4" color="primary" mat-button [routerLink]="['./']" routerLinkActive="router-link-active">Roles & Permissions</button>
+  </div>
+  <ng-container *ngIf="!roles || roles.length === 0; else rolesTable" #noRole>
+    <app-zero-data
+      [icon]="'manage_accounts'"
+      [zeroDataMessage]="'No role added yet!'"
+      [actionLink]="'/roles/create-role'"
+      [gateName]="'roles'"
+      [permissionType]="'can_write'"
+      [buttonIcon]="'add'"
+      [buttonText]="'Create Role'"
+    ></app-zero-data>
+  </ng-container>
+  <ng-template #rolesTable>
+    <div class="d-flex justify-content-space-between align-items-end m-t-8">
+      <div>
+        <div class="mat-subtitle-2 text-primary p-b-4">
+          Total Roles ({{ roles.length }})
+        </div>
+        <div class="mat-body-1 text-400">
+          Configure roles to define different groups of authorities over your
+          platform
+        </div>
+      </div>
+      <button
+       *ngIf="'roles' | permissions:'can_write'"
+        mat-flat-button
+        color="primary"
+        class="large-button button-radius-8"
+        [routerLink]="['/roles/create-role']"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>add</mat-icon>Add New Role
+      </button>
+    </div>
+    <custom-table
+      [tableData]="roles"
+      [gateName]="'roles'"
+      [rowActionIcons]="rowActionIcons"
+      (rowAction)="onAction($event)"
+      [tableColumns]="rolesTableColumns"
+    >
+    </custom-table>
+  </ng-template>
+</div>

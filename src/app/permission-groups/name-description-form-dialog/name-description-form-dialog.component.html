@@ -1,0 +1,64 @@
+<div class="permission-group-form-dialog-container">
+  <div class="m-l-32 m-t-24 m-b-24 m-r-24">
+    <div class="d-flex-row">
+      <div class="mat-headline-6 text-primary m-b-0">
+        {{ data.isUpdate ? "Edit" : "Create" }} Permission
+        {{ data.isPermissionGroup ? "Group" : "" }}
+      </div>
+      <span class="fill-remaining-space"></span>
+      <button (click)="close(null)" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div
+    class="form-container m-l-32 m-t-24 m-b-24 m-r-24 d-flex-column justify-content-space-between"
+  >
+    <form [formGroup]="nameAndDescriptionForm" novalidate>
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter Name"
+          formControlName="name"
+          maxlength="30"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          #textInput
+          matInput
+          maxlength="60"
+          placeholder="Enter Description"
+          formControlName="description"
+        ></textarea>
+        <div class="text-right mat-body-1 text-300">
+          <mat-hint>{{ textInput.value.length }}/60</mat-hint>
+        </div>
+      </mat-form-field>
+    </form>
+    <div>
+      <section class="m-t-24 d-flex-row align-items-center justify-content-end">
+        <button
+          mat-stroked-button
+          class="m-r-12 button-radius-8 outline-button-accent"
+          (click)="clearForm()"
+          color="accent"
+        >
+          Clear
+        </button>
+        <button
+          mat-flat-button
+          class="button-radius-8"
+          [disabled]="!nameAndDescriptionForm.valid"
+          color="primary"
+          (click)="createOrUpdateForm()"
+        >
+          {{ data.isUpdate ? "Update" : "Create" }}
+        </button>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.sidenav {
+  width: 80px;
+}
+
+.sidenav-expanded {
+  max-width: 260px;
+}
+
+.menu-item {
+  padding-top: 4px;
+  margin: 8px 12px;
+    .mdc-button {
+      justify-content: flex-start;
+    }
+    .mdc-list-item {
+      border-radius: 8px;
+      height: 42px;
+    }
+ }
+
+ .mdc-button{
+  color: #636578 !important;
+}
+
+ .mdc-list-item--activated {
+   background: #E0E2FF !important;
+ }
+
+ .mdc-list-item--selected {
+  background-color:#E0E2FF !important;
+ }
+
+ .mat-mdc-button > .mat-icon {
+  font-size: 24px;
+  margin-right: 0px;
+  padding-right: 8px;
+  height: 24px;
+  width: 24px;
+ }
+

@@ -1,0 +1,18 @@
+// .confirm-mat-icon {
+//   font-size: 35px;
+// }
+.confirm-header-text {
+  display: flex;
+  flex-direction: row;
+  .mat-icon {
+    height: 40px;
+    width: 64px;
+    font-size: 40px;
+  }
+}
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
+}

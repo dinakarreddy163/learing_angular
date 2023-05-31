@@ -1,0 +1,56 @@
+<div class="m-24">
+  <div class="mat-headline-6 text-primary m-b-8">Permissions</div>
+  <div class="d-flex align-items-center m-t-0 m-b-16">
+    <mat-icon color="accent"[routerLink]="['/home']">home</mat-icon>
+  <div class="m-l-8"><span>/</span></div>
+  <button class="m-l-4" color="primary" mat-button [routerLink]="['./']" routerLinkActive="router-link-active">Roles & Permissions</button>
+  </div>
+  <ng-container
+    *ngIf="
+      !permissionGroups || permissionGroups.length === 0;
+      else permissionGroupsTable
+    "
+    #noGroups
+  >
+    <app-zero-data
+      [icon]="'engineering'"
+      [zeroDataMessage]="'No permission group added yet!'"
+      [isDialog]="true"
+      [buttonIcon]="'add'"
+      [gateName]="'permissions'"
+      [permissionType]="'can_write'"
+      [buttonText]="'Create Permission Group'"
+      (openDialog)="openNameAndDescriptionFormDialog()"
+    ></app-zero-data>
+  </ng-container>
+  <ng-template #permissionGroupsTable>
+    <div class="d-flex justify-content-space-between align-items-end m-t-8">
+      <div>
+        <div class="mat-subtitle-2 text-secondary p-b-4">
+          Total Permission Groups ({{ permissionGroups.length }})
+        </div>
+        <div class="mat-body-1 text-300">
+          Permission Groups contains all the permissions users can access while
+          assigning a role.
+        </div>
+      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        *ngIf="'permissions' | permissions:'can_write'"
+        (click)="openNameAndDescriptionFormDialog()"
+        class="large-button button-radius-8"
+      >
+        <mat-icon>add</mat-icon>Create Group
+      </button>
+    </div>
+    <custom-table
+      [tableData]="permissionGroups"
+      [gateName]="'permissions'"
+      [rowActionIcons]="rowActionIcons"
+      (rowAction)="onAction($event)"
+      [tableColumns]="permissionGroupsTableColumns"
+    >
+    </custom-table>
+  </ng-template>
+</div>

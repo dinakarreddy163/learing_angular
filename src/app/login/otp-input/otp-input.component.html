@@ -1,0 +1,65 @@
+<div class="split left">
+  <div>
+    <img
+      height="36px"
+      width="40px"
+      src="assets/cq_logo.png"
+      alt="CraftedQ Logo"
+    />
+  </div>
+</div>
+<div class="split right">
+  <div class="centered">
+    <div class="m-l-28 icon-header-wrapper">
+      <mat-icon class="text-600">password</mat-icon>
+    </div>
+    <mat-card class="login-card">
+      <div class="mat-headline-6 text-primary">Two Step Verification</div>
+      <p class="mat-subtitle-2 subtitle-color">
+        We sent a verification code to your mobile. Enter the code from the
+        mobile in the field below.
+      </p>
+      <p class="text-400">******{{ maskedPhoneNumber }}</p>
+      <div class="otp-container">
+        <form class="otp-input-field" [formGroup]="form">
+          <div
+            class="field-container m-t-24 m-r-10 m-l-2"
+            *ngFor="let input of formInput; index as i"
+          >
+            <mat-form-field appearance="outline">
+              <input
+                style="text-align:center;"
+                #formRow
+                matInput
+                type="text"
+                formControlName="{{ input }}"
+                maxlength="1"
+                (keyup)="moveToNext($event, i)"
+                (keyup.enter)="onSubmit()"
+              />
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="m-t-8">
+        <button
+          mat-raised-button
+          [disabled]="!form.valid"
+          (click)="onSubmit()"
+          routerLinkActive="router-link-active"
+          color="primary"
+        >
+          Submit
+        </button>
+      </div>
+      <p class="text-center m-t-24 m-b-8">
+        <span class="mat-body-1 text-300">Didn't get the otp? Try</span>
+           <a [ngClass]="{'disabled-resend': !enableResend}" (click)="resendOTP()">
+          Resend
+           </a>
+        <span class="mat-body-1 text-300">After</span>
+        <span class="m-l-4 mat-body-2 text-400">{{ timeToResend }}</span>
+      </p>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div
+  *ngIf="isUpdate"
+  class="d-flex justify-content-space-between align-items-end m-t-24 m-b-24"
+>
+  <div>
+    <div class="mat-subtitle-2 text-primary">Add / Remove Permissions</div>
+    <div class="mat-body-1 text-300">
+      Users who are assigned to this role will receive the permission given
+      below
+    </div>
+  </div>
+  <div class="d-flex-row align-items-center">
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!enableEdit"
+      (click)="updatePermissions()"
+      class="button-radius-8 m-r-24"
+    >
+      Save
+    </button>
+    <div class="mat-subtitle-2 text-300">
+      <form [formGroup]="editSliderToggleForm">
+        <mat-slide-toggle
+          disableRipple="true"
+          formControlName="enableEdit"
+          labelPosition="before"
+          color="primary"
+        >
+          <div class="p-r-12">Edit Permissions</div>
+        </mat-slide-toggle>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="permissions-container" [ngClass]="{ 'm-r-2': isUpdate }">
+    <mat-table
+      [ngClass]="{ 'mat-elevation-z2': !isUpdate }"
+      [dataSource]="dataSource"
+      class=""
+    >
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> NAME </mat-header-cell>
+        <mat-cell class="" *matCellDef="let element">
+          <div class="mat-body-2 text-secondary m-l-11">
+            {{ element.name }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="can_read">
+        <mat-header-cell *matHeaderCellDef> READ </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox
+            color="primary"
+            (change)="$event ? toggleColumn($event, element, 'can_read') : null"
+            [checked]="element.can_read"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="can_write">
+        <mat-header-cell *matHeaderCellDef> WRITE </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox
+            color="primary"
+            (change)="
+              $event ? toggleColumn($event, element, 'can_write') : null
+            "
+            [checked]="element.can_write"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="can_delete">
+        <mat-header-cell *matHeaderCellDef> DELETE </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox
+            color="primary"
+            (change)="
+              $event ? toggleColumn($event, element, 'can_delete') : null
+            "
+            [checked]="element.can_delete"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+      <!-- Group header -->
+      <ng-container matColumnDef="groupHeader">
+        <mat-cell
+          colspan="999"
+          class="group-row-background-color"
+          *matCellDef="let groupBy"
+        >
+          <strong>
+            <mat-checkbox
+              color="primary"
+              (change)="
+                $event ? toggleAllGroupRows(groupBy.permission_group_id) : null
+              "
+              [checked]="isAllSelected(groupBy.permission_group_id)"
+              [indeterminate]="isPartiallySelected(groupBy)"
+            >
+              <div class="mat-subtitle-2 text-primary">
+                {{ groupBy.name }}
+              </div>
+            </mat-checkbox>
+          </strong>
+        </mat-cell>
+      </ng-container>
+      <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup">
+      </mat-row>
+    </mat-table>
+  </div>
+</div>

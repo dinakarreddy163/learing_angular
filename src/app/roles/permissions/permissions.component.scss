@@ -1,0 +1,33 @@
+.permissions-container {
+  .mdc-data-table__table {
+    border: 1px solid #eaeaec;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+.mdc-data-table__header-cell {
+  font-family: "Inter";
+  font-style: normal;
+  color: #636578;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.group-row-background-color {
+  background-color: #f5f5f7;
+}
+
+.mat-column-name {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 50% !important;
+  width: 50% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
